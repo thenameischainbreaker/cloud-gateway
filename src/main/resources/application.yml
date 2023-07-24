@@ -1,0 +1,25 @@
+server:
+ port: 9005
+ 
+spring:
+ application:
+  name: API-GATEWAY
+ cloud:
+  gateway:
+   routes:
+    - id: employeeservice
+      uri: lb://employeeservice
+      predicates:
+       - Path=/api/employees/**
+    - id: departmentservice
+      uri: http://departmentservice
+      predicates:
+       - Path=/departments**
+#eureka:
+# client:
+#  register-with-eureka: true
+#  fetch-registry: true
+#  service-url:
+#   defaultZone: http://host.docker.internal:9003/eureka/
+ instance:
+  hostname: host.docker.internal   
